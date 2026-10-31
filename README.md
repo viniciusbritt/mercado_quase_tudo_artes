@@ -13,6 +13,9 @@ https://raw.githubusercontent.com/viniciusbritt/mercado_quase_tudo_artes/main/ar
 - `kit/assets/` — logo, endcard, fachada real e as poses do Britinho recortadas (PNG com fundo transparente).
 - `kit/assets/produtos/` — fotos de produto recortadas.
 - `kit/musicas/` — músicas livres de direitos (Mixkit) e `LICENCAS.txt`.
+- `kit/modelos/` — layouts prontos que não são do build_oferta (Domingão do Gás com preço, Britinho na moto). Uso: `python3 kit/modelos/build_gas.py pasta_saida`.
+- `kit/fonts/` — Inter Display, Poppins e Lora (licença OFL). Se faltar fonte: `sh kit/fonts/instalar_fontes.sh`.
+- `kit/chroma.py` — recorta imagem do Flow em fundo verde: `python3 kit/chroma.py entrada.jpg saida.png`.
 
 ## Regras
 

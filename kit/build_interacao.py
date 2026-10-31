@@ -1,10 +1,13 @@
 """Stories de INTERACAO (isso ou aquilo / quiz / arrasta ai). Edite ARTES e rode: python3 build_interacao.py
-Poses: p_<nome>.png nesta pasta (recorte chroma do Flow). Espaco vazio embaixo e para a figurinha do Instagram."""
+Poses: assets/britinho_<nome>.png (recorte chroma do Flow); se nao existir, usa p_<nome>.png nesta pasta. Espaco vazio embaixo e para a figurinha do Instagram."""
 import os
 from playwright.sync_api import sync_playwright
-S = "/tmp/claude-0/-home-claude/283c481c-64ea-5d96-8655-3e47568e5090/scratchpad"
 K = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-D = os.path.dirname(os.path.abspath(__file__))  # poses recortadas p_<nome>.png ficam nesta pasta; saida em D
+D = os.path.dirname(os.path.abspath(__file__))  # saida (png e sheet.jpg) fica nesta pasta
+
+def P(pose):
+    a = os.path.join(K, f"britinho_{pose}.png")
+    return a if os.path.exists(a) else os.path.join(D, f"p_{pose}.png")
 
 FONTS = """
 @font-face{font-family:"Disp";src:url("file:///usr/share/fonts/opentype/inter/InterDisplay-Black.otf");font-weight:900}
@@ -47,7 +50,7 @@ def poll(n, q, a, b, pose, h=900, btop=610, tagtop=545, hint="Vota aqui embaixo 
 <div class="tag l" style="left:60px;top:{tagtop}px">{a}</div>
 <div class="tag r" style="right:60px;top:{tagtop}px">{b}</div>
 <div class="chao" style="top:{btop+h-30}px"></div>
-<img class="brit" src="file://{D}/p_{pose}.png" style="top:{btop}px;height:{h}px">
+<img class="brit" src="file://{P(pose)}" style="top:{btop}px;height:{h}px">
 <div class="hint" style="top:{btop+h+18}px"><b>{hint}</b></div>
 """
 
@@ -56,7 +59,7 @@ def quiz(n, q, pose, h=840, btop=600, hint="Responde no quiz 👇 e veja se acer
 <div class="q" style="font-size:76px">{q}</div>
 <div class="halo" style="top:{btop+20}px"></div>
 <div class="chao" style="top:{btop+h-30}px"></div>
-<img class="brit" src="file://{D}/p_{pose}.png" style="top:{btop}px;height:{h}px">
+<img class="brit" src="file://{P(pose)}" style="top:{btop}px;height:{h}px">
 <div class="hint" style="top:{btop+h+18}px">{hint}</div>
 """
 
@@ -65,7 +68,7 @@ def slider(n, q, pose, h=860, btop=600, hint="Arrasta o emoji até onde você co
 <div class="q">{q}</div>
 <div class="halo" style="top:{btop+20}px"></div>
 <div class="chao" style="top:{btop+h-30}px"></div>
-<img class="brit" src="file://{D}/p_{pose}.png" style="top:{btop}px;height:{h}px">
+<img class="brit" src="file://{P(pose)}" style="top:{btop}px;height:{h}px">
 <div class="hint" style="top:{btop+h+18}px">{hint}</div>
 """
 
@@ -90,7 +93,7 @@ if __name__ == "__main__":
         b.close()
     from PIL import Image
     ims = [Image.open(f"{D}/{n}.png").resize((360, 640)) for n in ARTES]
-    c = Image.new("RGB", (6 * 370, 640), "white")
+    c = Image.new("RGB", (len(ims) * 370, 640), "white")
     for i, im in enumerate(ims): c.paste(im, (i * 370, 0))
     c.save(D + "/sheet.jpg")
     print("ok")
