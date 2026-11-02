@@ -2,7 +2,7 @@
 
 1) Analisar:  python montar_reels.py analisar plano.json
    plano.json = {"cenas": ["cena1.mp4", ...], "endcard": "endcard.mp4"(opcional),
-                 "musica": "musica.mp3"(opcional), "saida": "reels.mp4"}
+                 "musica": "musica.mp3"(opcional), "capa": "capa.jpg"(OBRIGATÓRIA, feita no build_capa.py), "saida": "reels.mp4"}
    -> escreve plano.json de volta com "cortes" sugeridos por cena e gera <cena>_folha.jpg
       (folha de contato com o tempo de cada quadro) para revisar os cortes olhando.
       Cada cena ganha: {"arquivo", "ini", "fim", "remover": [[a,b], ...]}
@@ -146,6 +146,14 @@ def montar(plano_path):
         run(["ffmpeg", "-v", "error", "-y", "-i", P["endcard"], "-vf", V, "-af", "aresample=48000,aformat=channel_layouts=stereo",
              "-c:v", "libx264", "-crf", "17", "-c:a", "aac", "-b:a", "192k", o])
         partes.append(o)
+    capa_ms = None
+    if P.get("capa"):
+        # capa (1080x1920) entra como 0,5 s no FINAL do vídeo; o Buffer usa esse quadro como capa (thumbnailOffset)
+        o = f"{tmp}/zzz_capa.mp4"
+        run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-t", "0.5", "-i", P["capa"], "-f", "lavfi", "-t", "0.5", "-i", "anullsrc=r=48000:cl=stereo",
+             "-vf", V, "-c:v", "libx264", "-crf", "17", "-c:a", "aac", "-b:a", "192k", "-shortest", o])
+        capa_ms = sum(dur(x) for x in partes)
+        partes.append(o)
     lista = f"{tmp}/lista.txt"
     open(lista, "w").write("".join(f"file '{os.path.abspath(p)}'\n" for p in partes))
     base = f"{tmp}/base.mp4"
@@ -166,6 +174,10 @@ def montar(plano_path):
     cmd += ["-filter_complex", fc, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
             "-ar", "48000", "-movflags", "+faststart", P["saida"]]
     run(cmd)
+    if capa_ms is not None:
+        P["capa_offset_ms"] = int(capa_ms * 1000) + 200
+        json.dump(P, open(plano_path, "w"), ensure_ascii=False, indent=1)
+        print(f"capa em {P['capa_offset_ms']} ms (use em assets[0].video.metadata.thumbnailOffset no Buffer)")
     print(f"ok {P['saida']} {dur(P['saida']):.1f}s")
 
 if __name__ == "__main__":
