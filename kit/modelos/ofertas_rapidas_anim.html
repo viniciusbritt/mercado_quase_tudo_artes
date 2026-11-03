@@ -1,0 +1,132 @@
+<!doctype html><meta charset="utf-8">
+<style>
+@font-face{font-family:"Disp";src:url("file:///usr/share/fonts/opentype/inter/InterDisplay-Black.otf");font-weight:900}
+@font-face{font-family:"Pop";src:url("file:///usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf");font-weight:500}
+@font-face{font-family:"Pop";src:url("file:///usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf");font-weight:700}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{font-family:"Pop";color:#fff;position:relative;background:#3A1563}
+#bg{position:absolute;inset:0;background:
+ radial-gradient(55% 32% at 50% 55%,rgba(120,200,255,.28),transparent 70%),
+ radial-gradient(70% 40% at 15% 8%,rgba(123,63,176,.95),transparent 70%),
+ linear-gradient(180deg,#53228A 0%,#4B1E78 50%,#2E0F55 100%)}
+.grain{position:absolute;inset:0;opacity:.12;background-image:radial-gradient(rgba(255,255,255,.55) 1px,transparent 1.3px);background-size:8px 8px}
+.bub{position:absolute;border-radius:50%;border:3px solid rgba(255,255,255,.35);background:rgba(255,255,255,.06)}
+.abs{position:absolute}
+.pill{background:#FFD400;color:#4B1E78;font-family:"Disp";font-weight:900;border-radius:999px;box-shadow:0 10px 0 #E1251B}
+#topo{left:70px;right:70px;top:250px;display:flex;justify-content:space-between;align-items:center}
+#serie{font-size:40px;padding:8px 28px 14px;transform:rotate(-2deg)}
+.logo{background:#fff;border-radius:999px;padding:10px 20px}.logo img{height:50px;display:block}
+#tit{left:70px;right:70px;top:430px;font-family:"Disp";font-weight:900;font-size:150px;line-height:.9;letter-spacing:-.04em;text-shadow:0 8px 30px rgba(10,0,30,.4)}
+#tit .y{color:#FFD400}#tit .c{color:#9BE3FF}
+.prod{position:absolute;filter:drop-shadow(0 40px 40px rgba(10,0,30,.55))}
+.nome{left:70px;right:70px;text-align:left;font-family:"Disp";font-weight:900;font-size:78px;line-height:.95;letter-spacing:-.02em}
+.nome small{display:block;font-family:"Pop";font-weight:700;font-size:34px;letter-spacing:0;color:#E9DDF7;margin-top:10px}
+.tag{position:absolute;background:#FFD400;color:#4B1E78;border-radius:40px;padding:6px 30px 16px;display:flex;align-items:flex-start;gap:6px;box-shadow:0 14px 0 #E1251B,0 30px 40px rgba(0,0,0,.35)}
+.tag .rs{font-family:"Disp";font-weight:900;font-size:52px;margin-top:50px;color:#E1251B}
+.tag .i{font-family:"Disp";font-weight:900;font-size:210px;line-height:.92;letter-spacing:-.05em}
+.tag .d{display:flex;flex-direction:column;margin-top:22px}.tag .cc{font-family:"Disp";font-weight:900;font-size:92px;line-height:.9}
+.tag .u{font-weight:700;font-size:30px;color:#E1251B;margin-left:6px}
+.mini{position:absolute;background:#FFD400;color:#4B1E78;border-radius:22px;padding:2px 16px 8px;font-family:"Disp";font-weight:900;font-size:60px;box-shadow:0 8px 0 #E1251B;white-space:nowrap}
+.mini b{font-size:30px;color:#E1251B;vertical-align:28px;margin-right:4px}
+#pergunta{left:70px;right:70px;top:430px;font-family:"Disp";font-weight:900;font-size:120px;line-height:.92;letter-spacing:-.035em;text-align:center}
+#pergunta .y{color:#FFD400}
+#cta{left:70px;right:70px;top:420px;text-align:center}
+#cta .big{font-family:"Disp";font-weight:900;font-size:118px;line-height:.92;letter-spacing:-.035em}
+#cta .big .y{color:#FFD400}
+#cta .logoBig{display:inline-block;background:#fff;border-radius:48px;padding:34px 50px;margin:50px 0 40px;box-shadow:0 24px 50px rgba(10,0,30,.45)}
+#cta .logoBig img{height:170px;display:block}
+#cta .end{display:inline-block;background:#2C0D4D;border-radius:30px;padding:22px 34px;font-weight:700;font-size:40px;line-height:1.25}
+#cta .end span{display:block;font-weight:500;font-size:30px;color:#E9DDF7}
+#cta .zap{display:inline-block;margin-top:26px;font-weight:700;font-size:40px;background:#fff;color:#4B1E78;border-radius:999px;padding:14px 34px}
+#mod{left:70px;right:70px;top:1380px;text-align:center;font-family:"Disp";font-weight:900;font-size:76px;color:#FFD400;line-height:1}
+#conar{left:0;right:0;bottom:150px;text-align:center}
+#conar div{display:inline-block;background:#fff;color:#2C0D4D;font-weight:700;font-size:25px;letter-spacing:.02em;border-radius:14px;padding:12px 22px;line-height:1.3}
+#est{left:0;right:0;bottom:108px;text-align:center;font-size:21px;color:rgba(255,255,255,.75)}
+</style>
+<div id="bg"></div><div class="grain"></div><div id="bubs"></div>
+<div id="topo" class="abs"><div id="serie" class="pill">Ofertas do Quase Tudo 🧊</div><div class="logo"><img src="LOGO"></div></div>
+<div id="tit" class="abs">Ofertas<br><span class="c">geladas</span><br><span class="y">da semana!</span></div>
+
+<img id="p1" class="prod" src="M1">
+<div id="n1" class="abs nome">Michelob Ultra<small>Long neck 330 ml</small></div>
+<div id="t1" class="tag"><span class="rs">R$</span><span class="i">6</span><span class="d"><span class="cc">,99</span><span class="u">unid.</span></span></div>
+
+<img id="p2" class="prod" src="B2">
+<div id="n2" class="abs nome">Budweiser Zero<small>Long neck 330 ml · 0,0% álcool</small></div>
+<div id="t2" class="tag"><span class="rs">R$</span><span class="i">5</span><span class="d"><span class="cc">,50</span><span class="u">unid.</span></span></div>
+
+<img id="p3" class="prod" src="V0">
+<div id="n3" class="abs nome">Vinho Girola<small>Tinto suave bordô 750 ml</small></div>
+<div id="t3" class="tag"><span class="rs">R$</span><span class="i">14</span><span class="d"><span class="cc">,99</span><span class="u">unid.</span></span></div>
+
+<div id="pergunta" class="abs">Tá esperando<br><span class="y">o quê?</span></div>
+<div id="m1" class="mini"><b>R$</b>6,99</div><div id="m2" class="mini"><b>R$</b>5,50</div><div id="m3" class="mini"><b>R$</b>14,99</div>
+
+<div id="cta" class="abs"><div class="big">Passa no<br><span class="y">Quase Tudo!</span></div>
+<div class="logoBig"><img src="LOGO"></div><br>
+<div class="end">Av. João Farah, 649<span>Alto dos Pinheiros · Ibitinga</span></div><br>
+<div class="zap">WhatsApp (16) 3341-7427</div></div>
+<div id="mod" class="abs">Beba com moderação.</div>
+
+<div id="conar" class="abs"><div>BEBA COM MODERAÇÃO<br>VENDA E CONSUMO PROIBIDOS PARA MENORES DE 18 ANOS</div></div>
+<div id="est" class="abs">Ofertas válidas enquanto durarem os estoques. Imagens ilustrativas.</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const eo=x=>1-Math.pow(1-cl(x),3);               // ease out
+const back=x=>{x=cl(x);const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const pr=(t,a,d)=>cl((t-a)/d);                    // progress
+function vis(el,o,tx=0,ty=0,s=1,r=0){el.style.opacity=o;el.style.transform=`translate(${tx}px,${ty}px) scale(${s}) rotate(${r}deg)`;}
+// bolhas
+const B=[];for(let i=0;i<26;i++){const d=document.createElement('div');d.className='bub';const z=14+((i*37)%46);d.style.width=d.style.height=z+'px';$('bubs').append(d);B.push({el:d,x:(i*173)%1080,sp:60+(i*29)%120,ph:(i*311)%1920});}
+// cenas: [inicio, fim]
+const S={tit:[0,2.55],p1:[2.55,5.9],p2:[5.9,8.12],p3:[8.12,12.2],q:[12.2,14.02],cta:[14.02,99]};
+const PRICE={1:4.25,2:7.15,3:10.75};
+function prodScene(t,k,[a,b],fromRight){
+  const p=$('p'+k),n=$('n'+k),tg=$('t'+k);
+  const on=t>=a&&t<b+0.35;
+  if(!on){[p,n,tg].forEach(e=>e.style.opacity=0);return;}
+  const ein=back(pr(t,a,0.55)), out=eo(pr(t,b-0.05,0.35));
+  const dir=fromRight?1:-1;
+  const sway=Math.sin((t-a)*2.2)*2.2;
+  p.style.left='110px';p.style.top='560px';p.style.height='1030px';
+  vis(p,1-out,(1-ein)*900*dir-out*900*dir, 0, 1+0.04*pr(t,a,b-a), (1-ein)*14*dir+sway);
+  const ne=eo(pr(t,a+0.15,0.45));n.style.top='370px';
+  vis(n,ne*(1-out),(1-ne)*-60,0);
+  const pa=PRICE[k], te=back(pr(t,pa-0.15,0.45));
+  tg.style.left='540px';tg.style.top='1080px';
+  vis(tg,cl(pr(t,pa-0.15,0.12))*(1-out),0,(1-te)*-420,0.6+0.4*te,-5+ (t>pa+0.3?Math.sin((t-pa)*6)*1.2:0));
+}
+function render(t,capa){
+  // bolhas sobem sempre
+  B.forEach(b=>{const y=1920-((b.ph+t*b.sp)%2100);b.el.style.transform=`translate(${b.x+Math.sin(t+b.ph)*18}px,${y}px)`;});
+  // topo
+  vis($('topo'),1);
+  // título
+  if(capa){vis($('tit'),1);}
+  else {const [a,b]=S.tit;const i=back(pr(t,a+0.05,0.5)),o=eo(pr(t,b-0.25,0.3));vis($('tit'),cl(pr(t,a,0.1))*(1-o),0,(1-i)*120-o*80,0.85+0.15*i);}
+  prodScene(capa?-9:t,1,S.p1,true);prodScene(capa?-9:t,2,S.p2,false);prodScene(capa?-9:t,3,S.p3,true);
+  // pergunta + 3 garrafas
+  const [qa,qb]=S.q; const qon=capa||(t>=qa&&t<qb+0.3);
+  const qi=capa?1:back(pr(t,qa,0.45)), qo=capa?0:eo(pr(t,qb-0.05,0.3));
+  vis($('pergunta'),qon&&!capa?(1-qo):0,0,(1-qi)*80,0.9+0.1*qi);
+  const pos=[[60,820,820],[380,770,870],[700,790,850]];
+  [1,2,3].forEach((k,i)=>{
+    if(!qon)return;
+    const p=$('p'+k),m=$('m'+k);const e=capa?1:back(pr(t,qa+0.1+i*0.12,0.5));
+    p.style.left=pos[i][0]+'px';p.style.top=(capa?pos[i][1]+20:pos[i][1])+'px';p.style.height=pos[i][2]*(capa?0.86:0.82)+'px';
+    vis(p,(1-qo),0,(1-e)*700,1,(i-1)*4);
+    m.style.left=(pos[i][0]+(k==3?20:40))+'px';m.style.top=(capa?1500:1480)+'px';
+    vis(m,cl(e)*(1-qo),0,(1-e)*200,1,-4+i*3);
+  });
+  if(!qon)['m1','m2','m3'].forEach(i=>$(i).style.opacity=0);
+  // CTA
+  const ca=S.cta[0]; const ci=capa?0:back(pr(t,ca,0.5));
+  vis($('cta'),capa?0:cl(pr(t,ca,0.12)),0,(1-ci)*140,0.92+0.08*ci);
+  const md=capa?0:back(pr(t,18.0,0.4)); vis($('mod'),capa?0:cl(pr(t,18.0,0.1)),0,0,0.7+0.3*md);
+  // capa: título em cima
+  if(capa){$('tit').style.top='400px';$('tit').style.fontSize='128px';}
+}
+window.render=render;
+</script>
