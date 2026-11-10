@@ -1,0 +1,735 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ofertas do Britinho</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow column, phone first — tabs (ofertas · pedidos · agenda · fotos) under the purple band */
+:root{
+  --bg:#F6F2FA; --surface:#FFFFFF; --ink:#22152F; --muted:#6C5F79; --line:#E2D8EC;
+  --brand:#4B1E78; --brand-ink:#FFFFFF; --brand-soft:#EDE4F7; --price:#E1251B; --price-soft:#FCE7E6;
+  --ok:#1F7A4D; --ok-soft:#E3F3EA; --warn:#9A6200; --warn-soft:#FDF1D8;
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#150C1E; --surface:#21162D; --ink:#F3ECFA; --muted:#B4A6C3; --line:#3A2B4A;
+  --brand:#8B5BC9; --brand-ink:#FFFFFF; --brand-soft:#2F2140; --price:#FF5A4F; --price-soft:#3A1A1D;
+  --ok:#5FD39A; --ok-soft:#173326; --warn:#F2B84B; --warn-soft:#3A2C12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#150C1E; --surface:#21162D; --ink:#F3ECFA; --muted:#B4A6C3; --line:#3A2B4A;
+  --brand:#8B5BC9; --brand-ink:#FFFFFF; --brand-soft:#2F2140; --price:#FF5A4F; --price-soft:#3A1A1D;
+  --ok:#5FD39A; --ok-soft:#173326; --warn:#F2B84B; --warn-soft:#3A2C12; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.band{background:var(--brand);color:var(--brand-ink)}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header .wrap{padding-block:22px 18px;display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.85;margin:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,9vw,46px);line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance}
+header p.sub{margin:6px 0 0;max-width:44ch;opacity:.92}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-block:14px 0;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;background:transparent;color:var(--brand-ink);opacity:.78;border-radius:10px 10px 0 0;padding:9px 14px 11px;font-weight:600;font-size:14px;border:0}
+.tabs button[aria-selected="true"]{background:var(--bg);color:var(--ink);opacity:1}
+.tabs .n{display:inline-block;min-width:20px;margin-left:6px;padding:0 6px;border-radius:99px;background:var(--price);color:#fff;font-size:11px;line-height:18px;text-align:center}
+main .wrap{padding-block:20px 48px;display:flex;flex-direction:column;gap:28px}
+section.panel{display:flex;flex-direction:column;gap:28px}
+h2{font-family:var(--display);font-weight:400;font-size:26px;margin:0;letter-spacing:.01em}
+h3{font-size:15px;font-weight:600;margin:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:14px}
+label{font-weight:500;font-size:13px;display:block;margin-bottom:5px}
+.hint{color:var(--muted);font-size:12px;font-weight:400}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+input[type="file"]{padding:9px 10px;font-size:13px}
+textarea{min-height:72px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row>*{min-width:0}
+.price-field{display:flex;align-items:center;gap:8px;background:var(--price-soft);border:1px solid var(--line);border-radius:10px;padding:4px 12px}
+.price-field span{font-family:var(--display);color:var(--price);font-size:20px}
+.price-field input{border:0;background:transparent;font-family:var(--display);font-size:30px;color:var(--price);padding:4px 0;font-variant-numeric:tabular-nums}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--price)}
+.check label{margin:0;font-weight:400;font-size:14px}
+button{font:inherit;cursor:pointer;border-radius:10px;border:0}
+.primary{background:var(--price);color:#fff;font-weight:600;padding:14px;font-size:16px}
+.primary.alt{background:var(--brand)}
+.primary:disabled{opacity:.55;cursor:default}
+.status{font-size:13px;color:var(--muted);min-height:1.2em;margin:0}
+.status.ok{color:var(--ok)}
+.status.err{color:var(--price)}
+.list{display:flex;flex-direction:column;gap:10px}
+.tag{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 14px 14px 16px;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:start}
+.tag .name{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.tag .price{font-family:var(--display);color:var(--price);font-size:26px;line-height:1;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag .price small{font-size:14px}
+.tag .meta{grid-column:1/-1;color:var(--muted);font-size:13px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.tag .thumb{grid-column:1/-1;width:72px;height:72px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.tag .note{grid-column:1/-1;background:var(--brand-soft);border-radius:10px;padding:8px 10px;font-size:13px;color:var(--ink)}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--price);color:#fff}
+.pill.used{background:var(--ok)}
+.pill.soft{background:var(--brand-soft);color:var(--brand)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.okk{background:var(--ok-soft);color:var(--ok)}
+.tag .actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px}
+.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);padding:6px 12px;font-size:13px}
+.ghost.danger{color:var(--price)}
+.empty{border:1.5px dashed var(--line);border-radius:14px;padding:22px;text-align:center;color:var(--muted)}
+.head-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.count{color:var(--muted);font-size:13px}
+.note-p{color:var(--muted);font-size:13px;margin:0}
+/* agenda */
+.day{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start}
+.day .dlabel{display:flex;flex-direction:column;align-items:center;background:var(--brand);color:var(--brand-ink);border-radius:12px;padding:8px 4px;line-height:1.1}
+.day .dlabel b{font-family:var(--display);font-weight:400;font-size:26px;font-variant-numeric:tabular-nums}
+.day .dlabel span{font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.day.today .dlabel{background:var(--price)}
+.day .items{display:flex;flex-direction:column;gap:8px;min-width:0}
+.slot{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.slot .top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.slot .hora{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.slot .t{font-weight:600;overflow-wrap:anywhere}
+.slot .d{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.slot a{color:var(--brand);font-weight:600;font-size:13px}
+.slot.buf{border-left:4px solid var(--brand)}
+.slot .bufrow{display:flex;gap:10px;align-items:flex-start;min-width:0}
+.slot .bufrow img{width:54px;flex:none;border-radius:6px;background:var(--brand-soft)}
+.slot .bufrow div{min-width:0}
+.pill.err{background:var(--price);color:#fff}
+.base{width:100%;border-collapse:collapse;font-size:14px}
+.base th,.base td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.base th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.base td:first-child{font-weight:600;white-space:nowrap}
+.base td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto}
+.rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+/* fotos */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.ph{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.ph img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--brand-soft)}
+.ph .cap{padding:8px 10px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);min-width:0}
+.ph .cap b{color:var(--ink);font-size:13px}
+.ph .cap span{overflow-wrap:anywhere}
+.ph .ghost{margin:0 10px 10px;align-self:flex-start}
+@media (max-width:380px){.row{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="band">
+  <div class="wrap">
+    <p class="eyebrow">Quase Tudo Supermercado</p>
+    <h1>Ofertas do Britinho</h1>
+    <p class="sub">Tudo o que o Britinho precisa para montar os posts da semana: ofertas, pedidos, fotos reais e a agenda que ele planejou.</p>
+    <nav class="tabs" role="tablist" aria-label="Seções">
+      <button role="tab" id="tab-ofertas" aria-controls="ofertas" aria-selected="true" data-tab="ofertas">Ofertas<span class="n" id="n-ofertas" hidden></span></button>
+      <button role="tab" id="tab-pedidos" aria-controls="pedidos" aria-selected="false" data-tab="pedidos">Pedidos da semana<span class="n" id="n-pedidos" hidden></span></button>
+      <button role="tab" id="tab-agenda" aria-controls="agenda" aria-selected="false" data-tab="agenda">Agenda</button>
+      <button role="tab" id="tab-fotos" aria-controls="fotos" aria-selected="false" data-tab="fotos">Fotos reais</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- OFERTAS -->
+    <section class="panel" id="ofertas" role="tabpanel" aria-labelledby="tab-ofertas">
+      <form id="form" class="card" novalidate>
+        <h2>Nova oferta</h2>
+        <div>
+          <label for="produto">Produto</label>
+          <input id="produto" name="produto" placeholder="Ex.: Banana nanica" autocomplete="off" required>
+        </div>
+        <div class="row">
+          <div>
+            <label for="preco">Preço</label>
+            <div class="price-field"><span>R$</span><input id="preco" name="preco" inputmode="decimal" placeholder="0,00" required></div>
+          </div>
+          <div>
+            <label for="unidade">Vendido por</label>
+            <select id="unidade" name="unidade">
+              <option value="kg">kg</option>
+              <option value="unid">unidade</option>
+              <option value="pct">pacote</option>
+              <option value="cx">caixa</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="inicio">Vale de</label>
+            <input id="inicio" name="inicio" type="date" required>
+          </div>
+          <div>
+            <label for="fim">Até <span class="hint">(opcional)</span></label>
+            <input id="fim" name="fim" type="date">
+          </div>
+        </div>
+        <div>
+          <label for="evento">Faz parte de algum evento ou tema? <span class="hint">(opcional, muda o fundo da arte)</span></label>
+          <input id="evento" name="evento" placeholder="Ex.: Dia do Hortifrúti" autocomplete="off">
+        </div>
+        <div>
+          <label for="limite">Limite por CPF <span class="hint">(opcional)</span></label>
+          <input id="limite" name="limite" inputmode="numeric" placeholder="Ex.: 3">
+        </div>
+        <div>
+          <label for="obs">Recado para o Britinho <span class="hint">(opcional)</span></label>
+          <textarea id="obs" name="obs" placeholder="Ex.: chegou fresquinho hoje, só 20 kg"></textarea>
+        </div>
+        <div class="up-only">
+          <label for="ofoto">Foto real do produto <span class="hint">(opcional; sem foto, o Britinho busca uma)</span></label>
+          <input id="ofoto" name="ofoto" type="file" accept="image/png,image/jpeg,image/webp">
+        </div>
+        <div class="check">
+          <input id="destaque" name="destaque" type="checkbox">
+          <label for="destaque">É a oferta principal da semana (vai para o vídeo)</label>
+        </div>
+        <button class="primary" id="salvar" type="submit">Salvar oferta</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+
+      <section class="list" aria-labelledby="t-lista">
+        <div class="head-row">
+          <h2 id="t-lista">Ofertas cadastradas</h2>
+          <span class="count" id="count"></span>
+        </div>
+        <div id="lista" class="list">
+          <div class="empty" id="vazio">Nenhuma oferta ainda. Preencha o formulário acima e ela aparece aqui.</div>
+        </div>
+        <p class="note-p">As vencidas somem desta lista sozinhas. As marcadas como "usada" já viraram post.</p>
+      </section>
+    </section>
+
+    <!-- PEDIDOS -->
+    <section class="panel" id="pedidos" role="tabpanel" aria-labelledby="tab-pedidos" hidden>
+      <form id="pform" class="card" novalidate>
+        <h2>Novo pedido</h2>
+        <p class="note-p">Novidades, eventos, avisos ou ideias. O Britinho encaixa na agenda, faz a arte (feed e story) e decide o melhor dia.</p>
+        <div>
+          <label for="ptexto">O que precisa sair?</label>
+          <textarea id="ptexto" name="ptexto" placeholder="Ex.: fazer um vídeo falando que agora vendemos Cacau Show no mercado" required></textarea>
+        </div>
+        <div class="row">
+          <div>
+            <label for="ptipo">Tipo</label>
+            <select id="ptipo" name="ptipo">
+              <option value="novidade">Novidade no mercado</option>
+              <option value="video">Vídeo</option>
+              <option value="evento">Evento ou data especial</option>
+              <option value="aviso">Aviso (horário, feriado…)</option>
+              <option value="ideia">Ideia de conteúdo</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div>
+            <label for="pprazo">Quando sai?</label>
+            <select id="pprazo" name="pprazo">
+              <option value="livre">O Britinho escolhe</option>
+              <option value="ate">Até uma data</option>
+              <option value="dia">Num dia certo</option>
+            </select>
+          </div>
+        </div>
+        <div id="pdata-box" hidden>
+          <label for="pdata" id="pdata-label">Data</label>
+          <input id="pdata" name="pdata" type="date">
+        </div>
+        <div class="up-only">
+          <label for="pfoto">Foto <span class="hint">(opcional)</span></label>
+          <input id="pfoto" name="pfoto" type="file" accept="image/png,image/jpeg,image/webp">
+        </div>
+        <button class="primary alt" id="psalvar" type="submit">Mandar para o Britinho</button>
+        <p class="status" id="pstatus" role="status"></p>
+      </form>
+
+      <section class="list" aria-labelledby="t-plista">
+        <div class="head-row">
+          <h2 id="t-plista">Pedidos</h2>
+          <span class="count" id="pcount"></span>
+        </div>
+        <div id="plista" class="list">
+          <div class="empty" id="pvazio">Nenhum pedido ainda. Escreva acima o que precisa sair esta semana.</div>
+        </div>
+      </section>
+    </section>
+
+    <!-- AGENDA -->
+    <section class="panel" id="agenda" role="tabpanel" aria-labelledby="tab-agenda" hidden>
+      <section class="list" aria-labelledby="t-semana">
+        <div class="head-row">
+          <h2 id="t-semana">Agenda planejada</h2>
+          <span class="count" id="acount"></span>
+        </div>
+        <p class="note-p" id="bufst">Buffer: conectando para mostrar os posts programados ao vivo…</p>
+        <div id="alista" class="list">
+          <div class="empty" id="avazio">A agenda aparece aqui quando o Britinho planejar a semana.</div>
+        </div>
+        <p class="note-p">A agenda se atualiza na hora: os posts programados vêm direto do Buffer (canal mercadoquasetudo, atualiza a cada minuto), oferta nova entra no próximo dia de oferta livre e pedido com dia certo entra no dia dele. O resto o Britinho remaneja na rodada. A tarefa roda de segunda a sexta às 19h07 e deixa sempre os próximos dois dias prontos (na sexta, até segunda).</p>
+      </section>
+
+      <section class="card" aria-labelledby="t-base">
+        <h2 id="t-base">Cronograma base</h2>
+        <p class="note-p">É o ponto de partida de toda semana. Todo post de feed também vai para o story.</p>
+        <div class="tbl">
+          <table class="base">
+            <thead><tr><th>Dia</th><th>Hora</th><th>O que sai</th></tr></thead>
+            <tbody>
+              <tr><td>Segunda</td><td>19h</td><td>Carrossel "Quase Tudo que você não sabia"</td></tr>
+              <tr><td>Terça</td><td>12h</td><td>Oferta 1</td></tr>
+              <tr><td>Quarta</td><td>19h</td><td>Dia livre: pedido da semana, novidade ou Reels do Britinho. Sem pedido, sai uma ideia de conteúdo nova</td></tr>
+              <tr><td>Quinta</td><td>12h</td><td>Oferta 2 (sem oferta, só stories)</td></tr>
+              <tr><td>Sexta</td><td>7h</td><td>Reels "Ideias de Café da Manhã com Quase Tudo": mesa ou receita com produtos do mercado e fotos reais</td></tr>
+              <tr><td>Sábado</td><td>9h · 18h</td><td>Oferta 3, se houver · story "amanhã tem Domingão do Gás"</td></tr>
+              <tr><td>Domingo</td><td>7h</td><td>Domingão do Gás (story todo domingo; feed a cada 2 semanas, alternando com e sem preço)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Como o Britinho remaneja</h3>
+        <ol class="rules">
+          <li>Pedido com dia certo e oferta de evento entram no dia deles. O fixo daquele dia muda de lugar ou vira só story.</li>
+          <li>Ofertas ocupam terça, quinta e sábado. A que vence antes sobe para o primeiro dia livre.</li>
+          <li>No máximo 1 post de feed por dia e 6 por semana. Stories ficam entre 3 e 6 por dia.</li>
+          <li>Oferta ligada a um evento ganha fundo e estilo próprios do evento.</li>
+          <li>O gás muda de formato a cada semana (foto real, enquete, vídeo, com ou sem preço) para não cansar. O torresmo entra quando você pedir na aba Pedidos.</li>
+          <li>Café da Manhã: na segunda o Britinho escreve no item de sexta da agenda os produtos da mesa. Para trocar, mande um pedido até quarta. Sem resposta, segue a lista. Receitas não precisam de aprovação.</li>
+          <li>Toda semana tem pelo menos uma história: um Reels do Britinho, bastidores ou curiosidade.</li>
+          <li>Sem pedido na semana, o Britinho cria um post diferente por conta própria, pesquisando sobre o mercado e os produtos.</li>
+          <li>Reels: o Britinho gera as cenas no Flow, corta finais sem sentido e tempo parado, coloca música animada sem direitos autorais (uma diferente a cada vídeo) e programa o post.</li>
+          <li>Toda arte sai em duas versões: feed 1080×1440 e story 1080×1920.</li>
+        </ol>
+      </section>
+    </section>
+
+    <!-- FOTOS -->
+    <section class="panel" id="fotos" role="tabpanel" aria-labelledby="tab-fotos" hidden>
+      <form id="fform" class="card up-only" novalidate>
+        <h2>Nova foto real</h2>
+        <p class="note-p">Fotos do mercado, do torresmo, do gás, da equipe. O Britinho prefere usar estas no lugar de imagens da internet.</p>
+        <div>
+          <label for="ffile">Foto</label>
+          <input id="ffile" name="ffile" type="file" accept="image/png,image/jpeg,image/webp" required>
+        </div>
+        <div class="row">
+          <div>
+            <label for="fcat">Do que é?</label>
+            <select id="fcat" name="fcat">
+              <option>Torresmo</option>
+              <option>Gás</option>
+              <option>Fachada</option>
+              <option>Dentro do mercado</option>
+              <option>Equipe</option>
+              <option>Açougue</option>
+              <option>Hortifrúti</option>
+              <option>Padaria</option>
+              <option>Produto</option>
+              <option>Café da manhã</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div>
+            <label for="fdesc">Descrição <span class="hint">(opcional)</span></label>
+            <input id="fdesc" name="fdesc" placeholder="Ex.: torresmo saindo do tacho" autocomplete="off">
+          </div>
+        </div>
+        <button class="primary alt" id="fsalvar" type="submit">Guardar foto</button>
+        <p class="status" id="fstatus" role="status"></p>
+      </form>
+      <p class="note-p" id="fsemup" hidden>Só quem edita esta página consegue enviar fotos.</p>
+      <section class="list" aria-labelledby="t-fotos">
+        <div class="head-row">
+          <h2 id="t-fotos">Banco de fotos</h2>
+          <span class="count" id="fcount"></span>
+        </div>
+        <div class="grid" id="fgrid"></div>
+        <div class="empty" id="fvazio">Nenhuma foto ainda. Envie a primeira foto do torresmo ou do gás acima.</div>
+      </section>
+    </section>
+
+  </div>
+</main>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  let db = null, assets = null;
+  let ofertas = [], pedidos = [], agenda = [], fotos = [];
+
+  const iso = d => new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  $('inicio').value = iso(new Date());
+
+  function setStatus(el, msg, kind){ el.textContent = msg; el.className = 'status' + (kind ? ' ' + kind : ''); }
+  function parsePreco(v){ const n = Number(String(v).replace(/[^\d,.]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')); return isFinite(n) && n > 0 ? Math.round(n*100)/100 : null; }
+  function fmtPreco(n){ return Number(n).toFixed(2).replace('.', ','); }
+  function fmtData(s){ if(!s) return ''; const [y,m,d] = s.split('-'); return d + '/' + m; }
+  const dias = ['dom','seg','ter','qua','qui','sex','sáb'];
+  function diaSemana(s){ const [y,m,d] = s.split('-').map(Number); return dias[new Date(y, m-1, d).getDay()]; }
+  const unidadeTxt = {kg:'kg', unid:'unid', pct:'pct', cx:'cx'};
+  const span = (t, cls) => { const s = document.createElement('span'); if(cls) s.className = cls; s.textContent = t; return s; };
+  const blobSrc = id => '/_blob/' + id;
+  const errMsg = e => e && e.code === 'permission_denied' ? 'Sua conta não tem permissão para salvar aqui.' : 'Não deu para salvar agora. Tente de novo em instantes.';
+
+  /* ---------- abas ---------- */
+  const tabs = [...document.querySelectorAll('.tabs button')];
+  function openTab(name){
+    if(!tabs.some(t => t.dataset.tab === name)) name = 'ofertas';
+    for(const t of tabs){ const on = t.dataset.tab === name; t.setAttribute('aria-selected', on); $(t.dataset.tab).hidden = !on; }
+  }
+  tabs.forEach(t => t.addEventListener('click', () => { openTab(t.dataset.tab); try{ history.replaceState(null, '', '#' + t.dataset.tab); }catch(e){} }));
+  openTab((location.hash || '').slice(1));
+
+  function armDelete(btnEl, fn){
+    if(btnEl.dataset.armed){ fn(); return; }
+    btnEl.dataset.armed = '1'; const old = btnEl.textContent; btnEl.textContent = 'Toque de novo para apagar';
+    setTimeout(() => { if(btnEl.isConnected){ delete btnEl.dataset.armed; btnEl.textContent = old; } }, 4000);
+  }
+  async function uploadFoto(input){
+    const f = input.files && input.files[0];
+    if(!f) return null;
+    if(!assets) throw {code:'no_assets'};
+    const type = /png$/i.test(f.name) ? 'image/png' : /webp$/i.test(f.name) ? 'image/webp' : 'image/jpeg';
+    const r = await assets.upload(f, f.type && /^image\/(png|jpeg|webp)$/.test(f.type) ? undefined : {type});
+    return r.id;
+  }
+  function uploadErr(e){
+    if(e && e.code === 'too_large') return 'A foto passou de 20 MB. Mande uma menor.';
+    if(e && e.code === 'unsupported_type') return 'Use foto em JPG, PNG ou WEBP.';
+    if(e && e.code === 'no_assets') return 'Esta visualização não aceita fotos. Salve sem foto ou abra pelo Claude como editor.';
+    return null;
+  }
+
+  /* ---------- ofertas ---------- */
+  function renderOfertas(){
+    const hoje = iso(new Date()), lista = $('lista');
+    const ativos = ofertas.filter(r => !r.fim || r.fim >= hoje)
+      .sort((a,b) => (b.destaque?1:0)-(a.destaque?1:0) || String(a.fim||'9999').localeCompare(String(b.fim||'9999')));
+    lista.querySelectorAll('.tag').forEach(n => n.remove());
+    $('vazio').hidden = ativos.length > 0;
+    $('count').textContent = ativos.length ? ativos.length + (ativos.length === 1 ? ' ativa' : ' ativas') : '';
+    const novas = ativos.filter(r => !r.usadaEm).length;
+    $('n-ofertas').hidden = !novas; $('n-ofertas').textContent = novas;
+    for(const r of ativos){
+      const el = document.createElement('article'); el.className = 'tag';
+      const name = document.createElement('div'); name.className = 'name'; name.textContent = r.produto;
+      const price = document.createElement('div'); price.className = 'price';
+      const rs = document.createElement('small'); rs.textContent = 'R$ ';
+      const sm = document.createElement('small'); sm.textContent = ' /' + (unidadeTxt[r.unidade]||r.unidade);
+      price.append(rs, document.createTextNode(fmtPreco(r.preco)), sm);
+      const meta = document.createElement('div'); meta.className = 'meta';
+      if(r.destaque) meta.append(span('Principal', 'pill'));
+      if(r.usadaEm) meta.append(span('Usada', 'pill used'));
+      if(r.evento) meta.append(span(r.evento, 'pill soft'));
+      meta.append(span(r.fim ? fmtData(r.inicio) + ' a ' + fmtData(r.fim) : 'Desde ' + fmtData(r.inicio) + ', sem data de término'));
+      if(r.limite) meta.append(span('Limite ' + r.limite + ' por CPF'));
+      if(r.obs) meta.append(span('"' + r.obs + '"'));
+      el.append(name, price);
+      if(r.foto){ const im = document.createElement('img'); im.className = 'thumb'; im.alt = 'Foto de ' + r.produto; im.src = blobSrc(r.foto); im.onerror = () => im.remove(); el.append(im); }
+      el.append(meta);
+      const actions = document.createElement('div'); actions.className = 'actions';
+      const del = document.createElement('button'); del.type='button'; del.className='ghost danger'; del.textContent='Apagar';
+      del.addEventListener('click', () => armDelete(del, async () => {
+        try { await db.collection('ofertas').doc(r.id).delete(); setStatus($('status'), 'Oferta apagada.', 'ok'); }
+        catch(e){ setStatus($('status'), 'Não deu para apagar agora. Tente de novo em instantes.', 'err'); }
+      }));
+      actions.append(del); el.append(actions);
+      lista.append(el);
+    }
+  }
+
+  $('form').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const st = $('status'), btn = $('salvar');
+    const produto = $('produto').value.trim();
+    const preco = parsePreco($('preco').value);
+    const inicio = $('inicio').value, fim = $('fim').value;
+    if(!produto){ setStatus(st, 'Escreva o nome do produto.', 'err'); $('produto').focus(); return; }
+    if(preco === null){ setStatus(st, 'Escreva o preço, por exemplo 12,99.', 'err'); $('preco').focus(); return; }
+    if(!inicio){ setStatus(st, 'Escolha a partir de quando a oferta vale.', 'err'); return; }
+    if(fim && fim < inicio){ setStatus(st, 'Confira as datas: o "até" precisa ser depois do "vale de".', 'err'); return; }
+    if(!db){ setStatus(st, 'A lista ainda não carregou. Abra pelo app do Claude, logado na sua conta.', 'err'); return; }
+    btn.disabled = true; setStatus(st, 'Salvando…');
+    try {
+      let foto = null;
+      try { foto = await uploadFoto($('ofoto')); }
+      catch(e){ const m = uploadErr(e); if(m){ setStatus(st, m, 'err'); return; } throw e; }
+      const lim = parseInt($('limite').value, 10);
+      await db.collection('ofertas').add({ produto, preco, unidade: $('unidade').value, inicio, fim: fim || null,
+        evento: $('evento').value.trim() || null, limite: isFinite(lim) && lim > 0 ? lim : null, obs: $('obs').value.trim(),
+        foto, destaque: $('destaque').checked, criadoEm: new Date().toISOString(), usadaEm: null });
+      setStatus(st, 'Salvo! ' + produto + ' a R$ ' + fmtPreco(preco) + '.', 'ok');
+      ['produto','preco','limite','obs','evento','ofoto'].forEach(id => $(id).value = ''); $('destaque').checked = false; $('produto').focus();
+    } catch(e){ setStatus(st, errMsg(e), 'err'); }
+    finally { btn.disabled = false; }
+  });
+
+  /* ---------- pedidos ---------- */
+  const tipoTxt = {novidade:'Novidade', video:'Vídeo', evento:'Evento', aviso:'Aviso', ideia:'Ideia', outro:'Outro'};
+  $('pprazo').addEventListener('change', () => {
+    const v = $('pprazo').value; $('pdata-box').hidden = v === 'livre';
+    $('pdata-label').textContent = v === 'ate' ? 'Tem que sair até' : 'Dia em que tem que sair';
+  });
+  function renderPedidos(){
+    const lista = $('plista');
+    const ordem = {nova:0, agendado:1, feito:2};
+    const rows = [...pedidos].sort((a,b) => (ordem[a.status]??0)-(ordem[b.status]??0) || String(b.criadoEm).localeCompare(String(a.criadoEm)));
+    lista.querySelectorAll('.tag').forEach(n => n.remove());
+    $('pvazio').hidden = rows.length > 0;
+    const abertos = rows.filter(r => r.status !== 'feito').length;
+    $('pcount').textContent = abertos ? abertos + (abertos === 1 ? ' em aberto' : ' em aberto') : '';
+    const novos = rows.filter(r => !r.status || r.status === 'nova').length;
+    $('n-pedidos').hidden = !novos; $('n-pedidos').textContent = novos;
+    for(const r of rows){
+      const el = document.createElement('article'); el.className = 'tag';
+      const name = document.createElement('div'); name.className = 'name'; name.textContent = r.texto; name.style.gridColumn = '1/-1';
+      const meta = document.createElement('div'); meta.className = 'meta';
+      if(r.status === 'feito') meta.append(span('Feito', 'pill okk'));
+      else if(r.status === 'agendado') meta.append(span(r.agendadoPara ? 'Na agenda · ' + diaSemana(r.agendadoPara) + ' ' + fmtData(r.agendadoPara) : 'Na agenda', 'pill soft'));
+      else meta.append(span('Novo', 'pill warn'));
+      meta.append(span(tipoTxt[r.tipo] || 'Outro'));
+      if(r.prazo === 'dia' && r.data) meta.append(span('Sai em ' + fmtData(r.data)));
+      if(r.prazo === 'ate' && r.data) meta.append(span('Até ' + fmtData(r.data)));
+      if(r.prazo === 'livre' || !r.prazo) meta.append(span('O Britinho escolhe o dia'));
+      el.append(name);
+      if(r.foto){ const im = document.createElement('img'); im.className = 'thumb'; im.alt = 'Foto do pedido'; im.src = blobSrc(r.foto); im.onerror = () => im.remove(); el.append(im); }
+      el.append(meta);
+      if(r.notaBritinho){ const n = document.createElement('div'); n.className = 'note'; n.textContent = 'Britinho: ' + r.notaBritinho; el.append(n); }
+      const actions = document.createElement('div'); actions.className = 'actions';
+      const del = document.createElement('button'); del.type='button'; del.className='ghost danger'; del.textContent='Apagar';
+      del.addEventListener('click', () => armDelete(del, async () => {
+        try { await db.collection('demandas').doc(r.id).delete(); setStatus($('pstatus'), 'Pedido apagado.', 'ok'); }
+        catch(e){ setStatus($('pstatus'), 'Não deu para apagar agora. Tente de novo em instantes.', 'err'); }
+      }));
+      actions.append(del); el.append(actions);
+      lista.append(el);
+    }
+  }
+  $('pform').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const st = $('pstatus'), btn = $('psalvar');
+    const texto = $('ptexto').value.trim(), prazo = $('pprazo').value, data = $('pdata').value;
+    if(!texto){ setStatus(st, 'Escreva o que precisa sair.', 'err'); $('ptexto').focus(); return; }
+    if(prazo !== 'livre' && !data){ setStatus(st, 'Escolha a data.', 'err'); $('pdata').focus(); return; }
+    if(!db){ setStatus(st, 'A lista ainda não carregou. Abra pelo app do Claude, logado na sua conta.', 'err'); return; }
+    btn.disabled = true; setStatus(st, 'Enviando…');
+    try {
+      let foto = null;
+      try { foto = await uploadFoto($('pfoto')); }
+      catch(e){ const m = uploadErr(e); if(m){ setStatus(st, m, 'err'); return; } throw e; }
+      await db.collection('demandas').add({ texto, tipo: $('ptipo').value, prazo, data: prazo === 'livre' ? null : data,
+        foto, status: 'nova', agendadoPara: null, notaBritinho: null, criadoEm: new Date().toISOString() });
+      setStatus(st, 'Pedido enviado. O Britinho encaixa na próxima agenda.', 'ok');
+      ['ptexto','pdata','pfoto'].forEach(id => $(id).value = ''); $('pprazo').value = 'livre'; $('pdata-box').hidden = true;
+    } catch(e){ setStatus(st, errMsg(e), 'err'); }
+    finally { btn.disabled = false; }
+  });
+
+  /* ---------- agenda ---------- */
+  const stTxt = {planejado:['Planejado','pill warn'], arte:['Arte pronta','pill soft'], programado:['Programado','pill soft'], postado:['Postado','pill okk'], cancelado:['Cancelado','pill']};
+  /* Posts do Buffer (só o canal do mercado), lidos ao vivo */
+  const BUF_ORG = '6ae2bc4082663d76d494c180', BUF_CANAL = '6ae552a82f1f5ed6482accd9';
+  let bufPosts = null;
+  const bufSt = {scheduled:['No Buffer','pill soft'], sending:['Publicando','pill warn'], sent:['Publicado','pill okk'], error:['Erro no Buffer','pill err'], draft:['Rascunho','pill']};
+  const bufTipo = {story:'Story', post:'Feed', reel:'Reels'};
+  function spDate(isoStr){
+    const p = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date(isoStr));
+    const g = t => (p.find(x => x.type === t) || {}).value;
+    return {data: g('year') + '-' + g('month') + '-' + g('day'), hora: g('hour').replace('24','00') + ':' + g('minute')};
+  }
+  function bufSlot(b){
+    const s = document.createElement('div'); s.className = 'slot buf';
+    const top = document.createElement('div'); top.className = 'top';
+    top.append(span(b.hora, 'hora'));
+    const n = (b.assets || []).length, a0 = (b.assets || [])[0] || {}, im = a0.image || {};
+    let ig = b.metadata && b.metadata.type;
+    if(!ig){ ig = (a0.type === 'video' ? 'reel' : (im.height && im.width && im.height / im.width > 1.6 ? 'story' : 'post')); if(a0.type === 'video'){ try{ const ef = new URL(a0.source).searchParams.get('efg'); if(ef && /STORY/i.test(atob(ef.replace(/-/g,'+').replace(/_/g,'/')))) ig = 'story'; }catch(e){} } }
+    if(b.via === 'network') top.append(span('Feito no Instagram', 'pill'));
+    const st = bufSt[b.status] || bufSt.scheduled; top.append(span(st[0], st[1]));
+    top.append(span(ig === 'post' && n > 1 ? 'Feed · Carrossel (' + n + ')' : (bufTipo[ig] || 'Post'), 'pill ' + (ig === 'story' ? 'tp-story' : ig === 'reel' ? 'tp-reel' : 'tp-feed')));
+    if(!document.getElementById('tpcss')){const c=document.createElement('style');c.id='tpcss';c.textContent='.pill.tp-story{background:#E1306C;color:#fff;border-color:#E1306C;font-weight:700}.pill.tp-feed{background:#FFD400;color:#3A1563;border-color:#FFD400;font-weight:700}.pill.tp-reel{background:#2B7FFF;color:#fff;border-color:#2B7FFF;font-weight:700}';document.head.append(c);}
+    if(b.schedulingType === 'notification') top.append(span('Você publica pelo celular', 'pill warn'));
+    const row = document.createElement('div'); row.className = 'bufrow';
+    if(a0 && (a0.thumbnail || a0.source)){ const im = document.createElement('img'); im.src = a0.thumbnail || a0.source; im.alt = ''; im.loading = 'lazy'; row.append(im); }
+    const tx = document.createElement('div');
+    const t = document.createElement('div'); t.className = 't';
+    t.textContent = (b.text || '').split('\n').find(l => l.trim()) || (a0 && a0.image && a0.image.altText) || 'Story';
+    tx.append(t);
+    if(b.error){ const de = document.createElement('div'); de.className = 'd'; de.textContent = 'Erro: ' + (b.error.message || b.error); tx.append(de); }
+    row.append(tx); s.append(top, row);
+    return s;
+  }
+  function renderAgenda(){
+    const box = $('alista'), hoje = iso(new Date());
+    box.querySelectorAll('.day').forEach(n => n.remove());
+    const desde = iso(new Date(Date.now() - 2*864e5));
+    const rows = agenda.filter(r => r.data >= hoje || r.status !== 'postado')
+      .filter(r => r.data >= desde)
+      .filter(r => !(bufPosts && (r.status === 'programado' || r.status === 'postado')))
+      .sort((a,b) => (a.data + (a.hora||'')).localeCompare(b.data + (b.hora||'')));
+    const bufs = (bufPosts || []).filter(b => b.data >= desde);
+    bufs.forEach(b => rows.push(Object.assign({buffer: true}, b)));
+    rows.sort((a,b) => (a.data + (a.hora||'')).localeCompare(b.data + (b.hora||'')));
+    $('avazio').hidden = rows.length > 0;
+    $('acount').textContent = rows.length ? rows.length + ' posts' : '';
+    const byDay = {};
+    rows.forEach(r => (byDay[r.data] = byDay[r.data] || []).push(r));
+    for(const d of Object.keys(byDay)){
+      const day = document.createElement('div'); day.className = 'day' + (d === hoje ? ' today' : '');
+      const lab = document.createElement('div'); lab.className = 'dlabel';
+      const b = document.createElement('b'); b.textContent = d.slice(8,10);
+      lab.append(span(diaSemana(d)), b, span(['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][Number(d.slice(5,7))-1]));
+      const items = document.createElement('div'); items.className = 'items';
+      for(const r of byDay[d]){
+        if(r.buffer){ items.append(bufSlot(r)); continue; }
+        const s = document.createElement('div'); s.className = 'slot';
+        const top = document.createElement('div'); top.className = 'top';
+        if(r.hora) top.append(span(r.hora, 'hora'));
+        if(r.formato) top.append(span(r.formato));
+        const st = stTxt[r.status] || stTxt.planejado; top.append(span(st[0], st[1]));
+        const t = document.createElement('div'); t.className = 't'; t.textContent = r.titulo || '';
+        s.append(top, t);
+        if(r.detalhe){ const de = document.createElement('div'); de.className = 'd'; de.textContent = r.detalhe; s.append(de); }
+        if(r.arte){ const a = document.createElement('a'); a.href = blobSrc(r.arte); a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Ver arte'; s.append(a); }
+        items.append(s);
+      }
+      day.append(lab, items); box.append(day);
+    }
+  }
+
+  /* ---------- fotos ---------- */
+  function renderFotos(){
+    const grid = $('fgrid'); grid.textContent = '';
+    const rows = [...fotos].sort((a,b) => String(b.criadoEm).localeCompare(String(a.criadoEm)));
+    $('fvazio').hidden = rows.length > 0;
+    $('fcount').textContent = rows.length ? rows.length + (rows.length === 1 ? ' foto' : ' fotos') : '';
+    for(const r of rows){
+      const c = document.createElement('figure'); c.className = 'ph'; c.style.margin = '0';
+      const im = document.createElement('img'); im.alt = r.descricao || r.categoria; im.loading = 'lazy'; im.src = blobSrc(r.asset);
+      const cap = document.createElement('figcaption'); cap.className = 'cap';
+      const b = document.createElement('b'); b.textContent = r.categoria; cap.append(b);
+      if(r.descricao) cap.append(span(r.descricao));
+      c.append(im, cap);
+      if(assets){
+        const del = document.createElement('button'); del.type = 'button'; del.className = 'ghost danger'; del.textContent = 'Apagar';
+        del.addEventListener('click', () => armDelete(del, async () => {
+          try { await db.collection('fotos').doc(r.id).delete(); try { await assets.delete(r.asset); } catch(e){} setStatus($('fstatus'), 'Foto apagada.', 'ok'); }
+          catch(e){ setStatus($('fstatus'), 'Não deu para apagar agora. Tente de novo em instantes.', 'err'); }
+        }));
+        c.append(del);
+      }
+      grid.append(c);
+    }
+  }
+  $('fform').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const st = $('fstatus'), btn = $('fsalvar');
+    if(!$('ffile').files.length){ setStatus(st, 'Escolha a foto.', 'err'); return; }
+    if(!db || !assets){ setStatus(st, 'Abra pelo app do Claude, como editor, para enviar fotos.', 'err'); return; }
+    btn.disabled = true; setStatus(st, 'Enviando foto…');
+    try {
+      let id;
+      try { id = await uploadFoto($('ffile')); }
+      catch(e){ const m = uploadErr(e); if(m){ setStatus(st, m, 'err'); return; } throw e; }
+      await db.collection('fotos').add({ asset: id, categoria: $('fcat').value, descricao: $('fdesc').value.trim() || null, criadoEm: new Date().toISOString() });
+      setStatus(st, 'Foto guardada.', 'ok'); ['ffile','fdesc'].forEach(x => $(x).value = '');
+    } catch(e){ setStatus(st, errMsg(e), 'err'); }
+    finally { btn.disabled = false; }
+  });
+
+  /* ---------- conexão ---------- */
+  function msgAll(m){ [$('status'), $('pstatus'), $('fstatus')].forEach(el => setStatus(el, m)); }
+  (async () => {
+    if(!window.claude || !window.claude.use){ msgAll('Abra esta página no Claude para salvar.'); return; }
+    const [d, a] = await Promise.all([window.claude.use('db'), window.claude.use('assets')]);
+    db = d; assets = a;
+    document.querySelectorAll('.up-only').forEach(el => el.hidden = !assets);
+    $('fsemup').hidden = !!assets;
+    if(!db){ msgAll('Entre na sua conta do Claude para ver e salvar.'); return; }
+    const sub = (col, set, render) => db.collection(col).onSnapshot(snap => { set(snap.docs.map(x => Object.assign({id: x.id}, x.data()))); render(); },
+      () => setStatus($('status'), 'Não foi possível carregar a lista agora.', 'err'));
+    const loaded = {};
+    const after = (k, fn) => () => { fn(); loaded[k] = true; agendarSync(); };
+    sub('ofertas', v => ofertas = v, after('o', renderOfertas));
+    sub('demandas', v => pedidos = v, after('d', renderPedidos));
+    sub('agenda', v => agenda = v, after('a', renderAgenda));
+
+    /* Atualiza a agenda na hora: oferta nova entra no próximo dia de oferta livre,
+       oferta apagada libera o dia, pedido com dia certo entra no dia dele. */
+    let timer = null, syncing = false;
+    function agendarSync(){ if(!(loaded.o && loaded.d && loaded.a)) return; clearTimeout(timer); timer = setTimeout(sincronizar, 700); }
+    async function sincronizar(){
+      if(syncing) return; syncing = true;
+      try {
+        const hoje = iso(new Date());
+        const ids = new Set(ofertas.map(o => o.id));
+        const livres = ofertas.filter(o => !o.usadaEm && (!o.fim || o.fim >= hoje))
+          .sort((a,b) => (b.destaque?1:0)-(a.destaque?1:0) || String(a.fim||'9999').localeCompare(String(b.fim||'9999')) || String(a.criadoEm).localeCompare(String(b.criadoEm)));
+        const slots = agenda.filter(s => s.origem === 'oferta' && s.data >= hoje && (s.status || 'planejado') === 'planejado')
+          .sort((a,b) => a.data.localeCompare(b.data));
+        const usados = new Set(agenda.filter(s => s.ofertaId).map(s => s.ofertaId));
+        for(const s of slots){
+          if(s.ofertaId && !ids.has(s.ofertaId)){
+            await db.collection('agenda').doc(s.id).update({ ofertaId: null, titulo: 'Oferta: aguardando você cadastrar', detalhe: 'Sem oferta nova, este dia fica só com stories.' });
+            usados.delete(s.ofertaId); s.ofertaId = null;
+          }
+        }
+        for(const s of slots){
+          if(s.ofertaId) continue;
+          const o = livres.find(o => !usados.has(o.id) && o.inicio <= s.data && (!o.fim || o.fim >= s.data));
+          if(!o) continue;
+          usados.add(o.id);
+          const det = [o.evento ? 'Tema ' + o.evento : '', o.fim ? 'Vale até ' + fmtData(o.fim) : 'Enquanto durarem os estoques', o.foto ? 'Foto real enviada' : ''].filter(Boolean).join(' · ');
+          await db.collection('agenda').doc(s.id).update({ ofertaId: o.id, titulo: 'Oferta: ' + o.produto + ', R$ ' + fmtPreco(o.preco), detalhe: det });
+        }
+        for(const p of pedidos){
+          if(p.prazo !== 'dia' || !p.data || (p.status && p.status !== 'nova') || p.data < hoje) continue;
+          const id = p.data + '-pedido-' + p.id;
+          if(!agenda.some(s => s.id === id)){
+            await db.collection('agenda').doc(id).set({ data: p.data, hora: '', formato: p.tipo === 'video' ? 'Reels + story' : 'Feed + story',
+              titulo: p.texto.length > 90 ? p.texto.slice(0, 88) + '…' : p.texto, detalhe: 'Pedido seu com dia certo. O Britinho produz na rodada das 19h07.', origem: 'demanda', status: 'planejado', pedidoId: p.id });
+          }
+          await db.collection('demandas').doc(p.id).update({ status: 'agendado', agendadoPara: p.data, notaBritinho: 'Entrou na agenda do dia ' + fmtData(p.data) + '. O Britinho produz na rodada das 19h07.' });
+        }
+      } catch(e){ /* sem permissão para escrever: a rodada das 19h07 encaixa */ }
+      finally { syncing = false; }
+    }
+    sub('fotos', v => fotos = v, renderFotos);
+
+    /* Buffer ao vivo: só leitura, só o canal do mercado */
+    const mcp = await window.claude.use('mcp');
+    if(!mcp){ $('bufst').textContent = 'Buffer: esta tela não consegue ler o Buffer. Abra a página em claude.ai ou no app Claude.'; return; }
+    const agora = Date.now();
+    const filtro = { organizationId: BUF_ORG, channelIds: [BUF_CANAL], status: ['scheduled','sending','sent','error'],
+      dueAt: { start: new Date(agora - 3*864e5).toISOString(), end: new Date(agora + 45*864e5).toISOString() },
+      sort: [{ field: 'dueAt', direction: 'asc' }], first: 100 };
+    mcp.watchTool('Buffer', 'list_posts', filtro, ev => {
+      if(ev.type === 'data'){
+        const pl = ev.result && ev.result.payload; const edges = (pl && pl.edges) || [];
+        bufPosts = edges.map(e => e.node).filter(n => n && n.channelId === BUF_CANAL && n.dueAt)
+          .map(n => Object.assign({}, n, spDate(n.dueAt)));
+        const quando = ev.result.cache ? new Date(ev.result.cache.storedAt) : new Date();
+        $('bufst').textContent = 'Buffer ao vivo · ' + bufPosts.filter(b => b.status === 'scheduled').length + ' programados no canal mercadoquasetudo · atualizado às ' + quando.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+        renderAgenda();
+      } else {
+        const c = ev.error && ev.error.code;
+        if(c === 'server_not_connected' || c === 'needs_reauth') { bufPosts = null; $('bufst').textContent = 'Buffer: conecte (ou reconecte) o Buffer em claude.ai → Configurações → Conectores.'; renderAgenda(); }
+        else if(c === 'approval_required' || c === 'not_in_manifest') { $('bufst').textContent = 'Buffer: toque em "Ler o Buffer" para permitir que a agenda leia os posts.'; mostrarBotaoBuffer(); }
+        else { $('bufst').textContent = 'Buffer: não respondeu agora, tentando de novo em 1 minuto.'; }
+      }
+    }, { refetchInterval: 60000, cache: { staleTime: 30000, gcTime: 600000 } });
+    function mostrarBotaoBuffer(){
+      if($('bufbtn')) return;
+      const b = document.createElement('button'); b.id = 'bufbtn'; b.type = 'button'; b.className = 'primary'; b.textContent = 'Ler o Buffer';
+      b.addEventListener('click', async () => {
+        try{ await mcp.callTool('Buffer', 'list_posts', filtro); b.remove(); mcp.invalidate('Buffer').catch(() => {}); }
+        catch(e){ $('bufst').textContent = 'Buffer: a leitura não foi permitida. Tente de novo e escolha Permitir.'; }
+      });
+      $('bufst').after(b);
+    }
+  })();
+})();
+</script>
+
+</body></html>

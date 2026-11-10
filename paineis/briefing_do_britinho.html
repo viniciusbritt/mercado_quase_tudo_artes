@@ -1,0 +1,371 @@
+<title>Briefing do Britinho</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
+<style>
+/* Layout: ficha de pedido do mercado — abas no topo (Semana · História · Configurações), cartões por formato, barra de salvar fixa embaixo */
+:root{
+  --bg:#F6F2FB; --card:#FFFFFF; --ink:#24113F; --muted:#6B5C80; --line:#E3D9F0;
+  --roxo:#4B1E78; --roxo-2:#6A33A6; --amarelo:#FFD400; --vermelho:#E1251B; --ok:#1F8A4C; --ok-soft:#E3F4EA; --warn:#A35A00; --warn-soft:#FFF1D6;
+  --field:#FBF9FE; --chip:#EFE7F8;
+  --f-disp:"Baloo 2","Trebuchet MS",system-ui,sans-serif; --f-body:"Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#150A24; --card:#211335; --ink:#F1EAFB; --muted:#B4A6C9; --line:#3A2858; --roxo:#C9A6FF; --roxo-2:#A57BE8; --field:#1A0F2C; --chip:#2E1D49;
+  --ok:#6FD39A; --ok-soft:#173826; --warn:#F2B35C; --warn-soft:#3A2A12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#150A24; --card:#211335; --ink:#F1EAFB; --muted:#B4A6C9; --line:#3A2858; --roxo:#C9A6FF; --roxo-2:#A57BE8; --field:#1A0F2C; --chip:#2E1D49;
+  --ok:#6FD39A; --ok-soft:#173826; --warn:#F2B35C; --warn-soft:#3A2A12; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 110px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+h1{font-family:var(--f-disp);font-weight:800;font-size:clamp(28px,6vw,38px);line-height:1;margin:0;color:var(--roxo);text-wrap:balance}
+h1 span{display:inline-block;background:var(--amarelo);color:#4B1E78;border-radius:14px;padding:2px 12px 0;transform:rotate(-2deg);margin-left:4px}
+.sub{color:var(--muted);margin:6px 0 0;max-width:60ch}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 14px}
+.tab{font:inherit;font-weight:700;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--roxo);border-color:var(--roxo);color:var(--bg)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--amarelo);outline-offset:2px}
+.weekbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:14px}
+.weekbar b{font-family:var(--f-disp);font-size:20px;color:var(--roxo)}
+.weekbar .nav{font:inherit;border:1px solid var(--line);background:var(--field);color:var(--ink);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:18px}
+.prog{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.chip{font-size:12px;font-weight:700;letter-spacing:.03em;border-radius:999px;padding:3px 10px;background:var(--chip);color:var(--muted)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px}
+.card h2{font-family:var(--f-disp);font-weight:800;font-size:22px;line-height:1.1;margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.day{font-family:var(--f-body);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--amarelo);color:#4B1E78;border-radius:999px;padding:2px 10px}
+.why{color:var(--muted);margin:6px 0 14px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f.full{grid-column:1/-1}
+label{font-weight:700;font-size:13px}
+.hint{font-size:12.5px;color:var(--muted)}
+input[type=text],input[type=number],input[type=date],textarea,select{font:inherit;color:var(--ink);background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:9px 11px;width:100%}
+textarea{min-height:84px;resize:vertical}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{display:flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:12px;padding:7px 11px;background:var(--field);cursor:pointer;font-weight:600;font-size:14px}
+.opt input{accent-color:var(--roxo-2)}
+.fotos{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.fotos figure{margin:0;position:relative;width:92px}
+.fotos img{width:92px;height:92px;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block}
+.fotos figcaption{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fotos button{position:absolute;top:4px;right:4px;border:0;border-radius:999px;width:24px;height:24px;background:rgba(0,0,0,.6);color:#fff;cursor:pointer}
+.up{font:inherit;font-weight:700;border:1.5px dashed var(--roxo-2);color:var(--roxo);background:transparent;border-radius:12px;padding:8px 12px;cursor:pointer;align-self:flex-start}
+.marcos{display:flex;flex-direction:column;gap:8px}
+.marco{display:grid;grid-template-columns:96px 1fr 36px;gap:8px}
+.marco button{border:1px solid var(--line);background:var(--field);color:var(--muted);border-radius:10px;cursor:pointer}
+.add{font:inherit;font-weight:700;border:0;background:var(--chip);color:var(--roxo);border-radius:10px;padding:8px 12px;cursor:pointer;align-self:flex-start}
+.save{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding-block:10px calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));z-index:5}
+.save .in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:800;font-family:var(--f-disp);font-size:18px;border:0;border-radius:999px;padding:9px 24px;background:var(--amarelo);color:#4B1E78;cursor:pointer;box-shadow:0 4px 0 var(--vermelho)}
+.btn:disabled{opacity:.5;cursor:default}
+#st{font-size:13.5px;color:var(--muted);min-width:0;flex:1}
+.notice{background:var(--warn-soft);color:var(--warn);border-radius:14px;padding:10px 14px;font-weight:600;margin-bottom:14px}
+.tip{background:var(--chip);border-radius:14px;padding:10px 14px;font-size:14px;margin-bottom:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Briefing do <span>Britinho</span></h1>
+      <p class="sub">O que eu preciso de você para fazer as artes e os Reels da semana do Quase Tudo. Preencha o que souber e toque em <b>Salvar</b>: o Britinho lê daqui toda vez que for criar.</p>
+    </div>
+  </header>
+
+  <div id="aviso" class="notice" hidden></div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t-semana" aria-selected="true" data-v="semana">Semana</button>
+    <button class="tab" role="tab" id="t-historia" aria-selected="false" data-v="historia">História do mercado</button>
+    <button class="tab" role="tab" id="t-config" aria-selected="false" data-v="config">Como o mercado funciona</button>
+  </div>
+
+  <!-- SEMANA -->
+  <section id="v-semana">
+    <div class="weekbar">
+      <button class="nav" id="wprev" aria-label="Semana anterior">‹</button>
+      <div><div class="hint">Semana de</div><b id="wlabel">—</b></div>
+      <button class="nav" id="wnext" aria-label="Próxima semana">›</button>
+      <div class="prog" id="wprog"></div>
+    </div>
+
+    <div class="card">
+      <h2>Psiu, oferta! <span class="day">Reels · terça</span></h2>
+      <p class="why">A oferta mais forte da semana vira um Reels curto com o Britinho e uma capa com o preço. Se a oferta já está no painel Ofertas do Britinho, basta escrever o nome do produto.</p>
+      <div class="grid">
+        <div class="f"><label for="of_produto">Produto</label><input type="text" id="of_produto" data-k="oferta.produto" placeholder="Ex.: Picanha Friboi"></div>
+        <div class="f"><label for="of_preco">Preço (R$)</label><input type="text" id="of_preco" data-k="oferta.preco" placeholder="Ex.: 59,90"></div>
+        <div class="f"><label for="of_unidade">Unidade</label><input type="text" id="of_unidade" data-k="oferta.unidade" placeholder="kg, un, pacote 5 kg…"></div>
+        <div class="f"><label for="of_validade">Vale até</label><input type="text" id="of_validade" data-k="oferta.validade" placeholder="Ex.: sábado ou enquanto durar o estoque"></div>
+        <div class="f full"><label for="of_cond">Condições</label><input type="text" id="of_cond" data-k="oferta.condicoes" placeholder="Ex.: à vista, limite 2 por cliente"></div>
+        <div class="f full"><label>Foto do produto</label><span class="hint">Foto real, de frente, com boa luz. Sem foto eu procuro uma limpa na internet.</span>
+          <div class="fotos" data-fotos="oferta.fotos"></div><button class="up" data-up="oferta.fotos">+ Adicionar foto</button></div>
+        <div class="f full"><label>Não tem oferta forte esta semana?</label>
+          <div class="opts"><label class="opt"><input type="checkbox" id="of_sem" data-k="oferta.semOferta"> Sem oferta: troca por outro “Britinho resolve”</label></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>História do Quase Tudo <span class="day">Reels · quarta</span></h2>
+      <p class="why">Uma série em capítulos contando a história do mercado. O Britinho é o narrador. Os fatos vêm da aba <b>História do mercado</b>; aqui você só escolhe o capítulo desta semana (ou deixa comigo seguir a ordem).</p>
+      <div class="grid">
+        <div class="f full"><label for="hi_cap">Capítulo desta semana</label>
+          <select id="hi_cap" data-k="historiaSemana.capitulo">
+            <option value="">Deixa com o Britinho (segue a ordem)</option>
+            <option>1 · Como tudo começou</option>
+            <option>2 · Por que “Quase Tudo”</option>
+            <option>3 · A primeira grande mudança</option>
+            <option>4 · Um causo que todo mundo lembra</option>
+            <option>5 · Quem faz o mercado (a equipe)</option>
+            <option>6 · O que os clientes mais pedem</option>
+            <option>7 · 26 anos depois</option>
+          </select></div>
+        <div class="f full"><label for="hi_det">Algum detalhe para este capítulo?</label><textarea id="hi_det" data-k="historiaSemana.detalhe" placeholder="Ex.: neste capítulo quero mostrar a reforma de 2015 e a fachada nova"></textarea></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Britinho resolve <span class="day">Reels · sábado</span></h2>
+      <p class="why">Humor com um problema do dia a dia que o mercado resolve. Escolha um tema ou escreva o seu.</p>
+      <div class="grid">
+        <div class="f full"><label>Tema</label>
+          <div class="opts" id="br_opts">
+            <label class="opt"><input type="radio" name="br" value="Visita chegou de surpresa"> Visita de surpresa</label>
+            <label class="opt"><input type="radio" name="br" value="Faltou carvão no churrasco"> Faltou carvão no churrasco</label>
+            <label class="opt"><input type="radio" name="br" value="Acabou o gás no almoço"> Acabou o gás no almoço</label>
+            <label class="opt"><input type="radio" name="br" value="Bolo de aniversário esquecido"> Esqueceram o bolo</label>
+            <label class="opt"><input type="radio" name="br" value="Geladeira vazia no domingo"> Geladeira vazia no domingo</label>
+            <label class="opt"><input type="radio" name="br" value=""> Deixa com o Britinho</label>
+          </div></div>
+        <div class="f full"><label for="br_livre">Ou escreva o seu tema</label><input type="text" id="br_livre" data-k="resolve.livre" placeholder="Ex.: cachorro comeu o pão do café"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Café da Manhã <span class="day">Reels · sexta</span></h2>
+      <p class="why">Se quiser escolher a mesa deste episódio, escreva aqui. Em branco, eu proponho a lista na segunda e sigo ela.</p>
+      <div class="grid"><div class="f full"><label for="cf_mesa">Itens da mesa</label><input type="text" id="cf_mesa" data-k="cafe.itens" placeholder="Ex.: tapioca, queijo minas, suco de laranja"></div></div>
+    </div>
+
+    <div class="card">
+      <h2>Domingão do Gás <span class="day">Story · domingo</span></h2>
+      <p class="why">O preço muda muito. Só coloco preço se estiver escrito aqui.</p>
+      <div class="grid">
+        <div class="f"><label for="gas_preco">Preço deste domingo (R$)</label><input type="text" id="gas_preco" data-k="gas.preco" placeholder="Ex.: 110,00 (em branco = sem preço)"></div>
+        <div class="f"><label for="gas_cond">Condição</label><input type="text" id="gas_cond" data-k="gas.condicao" placeholder="Ex.: à vista e para retirada"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Avisos e outras ofertas da semana</h2>
+      <p class="why">Feriado, horário especial, produto novo, evento, contratação… e ofertas menores que podem virar story.</p>
+      <div class="grid">
+        <div class="f full"><label for="av_txt">Avisos</label><textarea id="av_txt" data-k="avisos" placeholder="Ex.: dia 15 é feriado, abrimos das 7h30 às 12h30"></textarea></div>
+        <div class="f full"><label for="ofx_txt">Ofertas para story (uma por linha: produto – preço – validade)</label><textarea id="ofx_txt" data-k="ofertasStory" placeholder="Leite Italac 1L – 4,99 – até quinta"></textarea></div>
+        <div class="f full"><label for="obs_txt">Algo que NÃO pode sair esta semana?</label><input type="text" id="obs_txt" data-k="evitar" placeholder="Ex.: não falar de cerveja, acabou o estoque de frango"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA -->
+  <section id="v-historia" hidden>
+    <div class="tip">Preencha uma vez. Isso alimenta todos os capítulos do Reels de quarta. Escreva do jeito que você contaria para um cliente: frases simples e fatos que você tem certeza. O que ficar em branco eu não invento.</div>
+    <div class="card">
+      <h2>O começo</h2>
+      <div class="grid" style="margin-top:12px">
+        <div class="f"><label for="h_ano">Ano em que abriu</label><input type="text" id="h_ano" data-k="ano" placeholder="Ex.: 1999"></div>
+        <div class="f"><label for="h_fund">Quem fundou</label><input type="text" id="h_fund" data-k="fundadores" placeholder="Nome como pode aparecer no vídeo"></div>
+        <div class="f full"><label for="h_comeco">Como começou</label><span class="hint">Onde era, tamanho, quantas pessoas trabalhavam, o que vendia no início.</span><textarea id="h_comeco" data-k="comeco"></textarea></div>
+        <div class="f full"><label for="h_nome">Por que o nome “Quase Tudo”?</label><textarea id="h_nome" data-k="porqueNome"></textarea></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Momentos marcantes</h2>
+      <p class="why">Mudança de endereço, reforma, ampliação, açougue novo, crise que superaram, prêmio… Um por linha, com o ano.</p>
+      <div class="marcos" id="marcos"></div>
+      <button class="add" id="addMarco" style="margin-top:8px">+ Adicionar momento</button>
+    </div>
+    <div class="card">
+      <h2>O jeito do mercado</h2>
+      <div class="grid" style="margin-top:12px">
+        <div class="f full"><label for="h_causos">Causos e curiosidades</label><span class="hint">Histórias engraçadas ou marcantes, clientes antigos, algo que só o Quase Tudo tem.</span><textarea id="h_causos" data-k="causos"></textarea></div>
+        <div class="f full"><label for="h_elogio">O que os clientes mais elogiam</label><input type="text" id="h_elogio" data-k="elogios" placeholder="Ex.: o torresmo, o atendimento, a carne"></div>
+        <div class="f full"><label for="h_equipe">Equipe que pode ser citada</label><span class="hint">Nome e função de quem AUTORIZOU aparecer. Pessoas reais só entram por foto real ou citadas pelo nome; o Flow não desenha o rosto de ninguém.</span><textarea id="h_equipe" data-k="equipe" placeholder="Ex.: Seu João – açougueiro desde 2003 (autorizou)"></textarea></div>
+        <div class="f full"><label for="h_frase">Uma frase que resume o mercado</label><input type="text" id="h_frase" data-k="frase" placeholder="Ex.: mercado de bairro com cara de família"></div>
+        <div class="f full"><label for="h_evitar">O que não pode ser contado</label><input type="text" id="h_evitar" data-k="evitar" placeholder="Assuntos que a família prefere não expor"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Fotos antigas e da loja</h2>
+      <p class="why">Fotos da fachada antiga, da inauguração, da reforma, da equipe. Escreva o ano no nome do arquivo se souber. Elas entram no Reels como “foto de época” e servem de base para as cenas do Flow.</p>
+      <div class="fotos" data-fotos="fotos"></div>
+      <button class="up" data-up="fotos">+ Adicionar fotos</button>
+    </div>
+  </section>
+
+  <!-- CONFIG -->
+  <section id="v-config" hidden>
+    <div class="tip">Isso evita que o Britinho prometa algo que o mercado não faz.</div>
+    <div class="card">
+      <h2>Entrega</h2>
+      <div class="grid" style="margin-top:12px">
+        <div class="f full"><label>O mercado entrega?</label>
+          <div class="opts" id="ent_opts">
+            <label class="opt"><input type="radio" name="ent" value="nao"> Não entrega</label>
+            <label class="opt"><input type="radio" name="ent" value="gas"> Só gás</label>
+            <label class="opt"><input type="radio" name="ent" value="compras"> Compras e gás</label>
+          </div></div>
+        <div class="f"><label for="c_taxa">Taxa de entrega</label><input type="text" id="c_taxa" data-k="taxa" placeholder="Ex.: grátis acima de R$ 100"></div>
+        <div class="f"><label for="c_area">Onde entrega</label><input type="text" id="c_area" data-k="area" placeholder="Ex.: toda Ibitinga"></div>
+        <div class="f full"><label for="c_pedido">Como pede</label><input type="text" id="c_pedido" data-k="comoPede" placeholder="Ex.: pelo WhatsApp 16 3341-7427"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Outros serviços</h2>
+      <div class="grid" style="margin-top:12px">
+        <div class="f full"><label for="c_serv">Encomendas, cartões, pix, estacionamento…</label><textarea id="c_serv" data-k="servicos" placeholder="Ex.: aceita encomenda de torresmo até sexta; aceita pix e cartão; tem estacionamento"></textarea></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="save"><div class="in"><button class="btn" id="salvar" disabled>Salvar</button><span id="st">Carregando…</span></div></div>
+<input type="file" id="file" accept="image/*" multiple hidden>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  let db = null, assets = null, view = 'semana', week = mondayOf(new Date(Date.now() + 2*864e5));
+  const docs = {semana:{}, historia:{}, config:{}};
+  const loaded = {};
+  let dirty = false;
+
+  function mondayOf(d){ const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); const w = (x.getDay()+6)%7; x.setDate(x.getDate()-w); return x; }
+  function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function fmtWeek(d){ const e = new Date(d); e.setDate(e.getDate()+6); const f = x => x.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.',''); return f(d)+' a '+f(e); }
+  function path(v){ return v === 'semana' ? 'semanas/'+iso(week) : v === 'historia' ? 'historia/principal' : 'config/geral'; }
+  function get(o,k){ return k.split('.').reduce((a,p)=>a&&a[p], o); }
+  function set(o,k,val){ const ps=k.split('.'); let a=o; ps.slice(0,-1).forEach(p=>{ if(typeof a[p]!=='object'||!a[p]) a[p]={}; a=a[p]; }); a[ps.at(-1)]=val; }
+  function st(t){ $('st').textContent = t; }
+
+  // abas
+  document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => {
+    view = b.dataset.v;
+    document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+    ['semana','historia','config'].forEach(v => $('v-'+v).hidden = v !== view);
+    load(view);
+  }));
+  $('wprev').onclick = () => { week.setDate(week.getDate()-7); loaded.semana = false; load('semana'); };
+  $('wnext').onclick = () => { week.setDate(week.getDate()+7); loaded.semana = false; load('semana'); };
+
+  function section(v){ return $('v-'+v); }
+  function fill(v){
+    const d = docs[v], s = section(v);
+    s.querySelectorAll('[data-k]').forEach(el => { const val = get(d, el.dataset.k); if(el.type === 'checkbox') el.checked = !!val; else el.value = val == null ? '' : val; });
+    if(v === 'semana'){ const r = (d.resolve||{}).tema; document.querySelectorAll('input[name=br]').forEach(x => x.checked = r != null && x.value === r); $('wlabel').textContent = fmtWeek(week); }
+    if(v === 'config'){ document.querySelectorAll('input[name=ent]').forEach(x => x.checked = x.value === d.entrega); }
+    if(v === 'historia') renderMarcos();
+    s.querySelectorAll('[data-fotos]').forEach(box => renderFotos(box, get(d, box.dataset.fotos) || []));
+    progress();
+  }
+  function collect(v){
+    const d = docs[v], s = section(v);
+    s.querySelectorAll('[data-k]').forEach(el => set(d, el.dataset.k, el.type === 'checkbox' ? el.checked : el.value.trim()));
+    if(v === 'semana'){ const r = document.querySelector('input[name=br]:checked'); set(d,'resolve.tema', r ? r.value : ''); d.semana = iso(week); }
+    if(v === 'config'){ const r = document.querySelector('input[name=ent]:checked'); d.entrega = r ? r.value : ''; }
+    if(v === 'historia'){ d.marcos = [...document.querySelectorAll('.marco')].map(m => ({ano:m.querySelector('.ano').value.trim(), texto:m.querySelector('.tx').value.trim()})).filter(m => m.ano || m.texto); }
+    d.atualizadoEm = new Date().toISOString();
+    return d;
+  }
+  function progress(){
+    if(view !== 'semana') return;
+    const d = docs.semana;
+    const items = [
+      ['Oferta', (d.oferta && (d.oferta.produto || d.oferta.semOferta))],
+      ['História', true],
+      ['Resolve', d.resolve && (d.resolve.tema || d.resolve.livre) ],
+      ['Gás', d.gas && d.gas.preco],
+      ['Avisos', d.avisos]
+    ];
+    $('wprog').innerHTML = '';
+    items.forEach(([n,ok]) => { const c = document.createElement('span'); c.className = 'chip' + (ok ? ' ok' : ''); c.textContent = (ok ? '✓ ' : '') + n; $('wprog').append(c); });
+  }
+
+  // marcos
+  function renderMarcos(){
+    const box = $('marcos'); box.innerHTML = '';
+    const list = (docs.historia.marcos && docs.historia.marcos.length) ? docs.historia.marcos : [{ano:'',texto:''}];
+    list.forEach((m,i) => addMarco(m, i));
+  }
+  function addMarco(m, i){
+    const r = document.createElement('div'); r.className = 'marco';
+    const n = $('marcos').children.length;
+    r.innerHTML = '<input type="text" class="ano" placeholder="Ano" aria-label="Ano"><input type="text" class="tx" placeholder="O que aconteceu" aria-label="O que aconteceu"><button type="button" aria-label="Remover">×</button>';
+    r.querySelector('.ano').id = 'm_ano_'+n; r.querySelector('.tx').id = 'm_tx_'+n;
+    r.querySelector('.ano').value = m.ano || ''; r.querySelector('.tx').value = m.texto || '';
+    r.querySelector('button').onclick = () => { r.remove(); markDirty(); };
+    r.querySelectorAll('input').forEach(x => x.addEventListener('input', markDirty));
+    $('marcos').append(r);
+  }
+  $('addMarco').onclick = () => { addMarco({}, 0); markDirty(); };
+
+  // fotos
+  let upKey = null;
+  function renderFotos(box, list){
+    box.innerHTML = '';
+    list.forEach((f, i) => {
+      const fig = document.createElement('figure');
+      const img = document.createElement('img'); img.src = f.url || ('/_blob/' + f.id); img.alt = f.nome || 'foto';
+      const cap = document.createElement('figcaption'); cap.textContent = f.nome || '';
+      const del = document.createElement('button'); del.type = 'button'; del.textContent = '×'; del.setAttribute('aria-label','Tirar foto');
+      del.onclick = () => { list.splice(i,1); set(docs[view], box.dataset.fotos, list); renderFotos(box, list); markDirty(); };
+      fig.append(img, cap, del); box.append(fig);
+    });
+  }
+  document.querySelectorAll('[data-up]').forEach(b => b.addEventListener('click', () => {
+    if(!assets){ st('Não consegui liberar o envio de fotos nesta tela. Mande as fotos pelo chat.'); return; }
+    upKey = b.dataset.up; $('file').value = ''; $('file').click();
+  }));
+  $('file').addEventListener('change', async e => {
+    const files = [...e.target.files]; if(!files.length || !upKey) return;
+    const d = docs[view]; const list = get(d, upKey) || []; set(d, upKey, list);
+    for(const f of files){
+      st('Enviando ' + f.name + '…');
+      try{ const r = await assets.upload(f); list.push({id:r.id, url:r.url, nome:f.name}); }
+      catch(err){ st('Não deu para enviar ' + f.name + ': ' + (err && err.message || 'erro')); }
+    }
+    document.querySelectorAll('[data-fotos="'+upKey+'"]').forEach(box => { if(!box.closest('section').hidden) renderFotos(box, list); });
+    markDirty(); st('Fotos adicionadas. Toque em Salvar.');
+  });
+
+  function markDirty(){ dirty = true; $('salvar').disabled = !db; st('Alterações não salvas.'); progress(); }
+  document.addEventListener('input', e => { if(e.target.closest('section')) { if(view==='semana') collect('semana'); markDirty(); } });
+
+  async function load(v){
+    fill(v);
+    if(!db || loaded[v]) return;
+    st('Carregando…');
+    const t = setTimeout(() => st('Demorou para carregar. Confira a internet e recarregue a página.'), 10000);
+    try{ const s = await db.doc(path(v)).get(); clearTimeout(t); docs[v] = s.exists ? (s.data() || {}) : {}; loaded[v] = true; fill(v); dirty = false; $('salvar').disabled = true; st(docs[v].atualizadoEm ? 'Salvo em ' + new Date(docs[v].atualizadoEm).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}) : 'Ainda não preenchido.'); }
+    catch(err){ clearTimeout(t); st('Não consegui ler: ' + (err && err.message || 'erro')); }
+  }
+
+  $('salvar').onclick = async () => {
+    if(!db) return;
+    const d = collect(view); $('salvar').disabled = true; st('Salvando…');
+    try{ await db.doc(path(view)).set(JSON.parse(JSON.stringify(d))); dirty = false; st('Salvo! O Britinho já pode usar.'); progress(); }
+    catch(err){ $('salvar').disabled = false; st('Não salvou: ' + (err && err.message || 'erro') + '. Tente de novo.'); }
+  };
+
+  fill('semana');
+  (async () => {
+    try{ db = await claude.use('db'); }catch(e){ db = null; }
+    try{ assets = await claude.use('assets'); }catch(e){ assets = null; }
+    if(!db){ $('aviso').hidden = false; $('aviso').textContent = 'Abra esta página logado no Claude para salvar as informações.'; st('Sem conexão com o armazenamento.'); return; }
+    load('semana');
+  })();
+})();
+</script>

@@ -1,0 +1,30 @@
+{
+  "atualizadoEm": "2026-11-03T18:01:45.898Z",
+  "avisos": "",
+  "cafe": {
+    "itens": "Mingau de Aveia e leite com achocolatado."
+  },
+  "evitar": "",
+  "gas": {
+    "condicao": "á vista e retirada",
+    "preco": "110,00"
+  },
+  "historiaSemana": {
+    "capitulo": "",
+    "detalhe": ""
+  },
+  "oferta": {
+    "condicoes": "",
+    "preco": "",
+    "produto": "",
+    "semOferta": false,
+    "unidade": "",
+    "validade": ""
+  },
+  "ofertasStory": "",
+  "resolve": {
+    "livre": "",
+    "tema": ""
+  },
+  "semana": "2026-11-02"
+}
